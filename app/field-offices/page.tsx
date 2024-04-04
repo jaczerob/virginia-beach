@@ -8,7 +8,7 @@ export default async function Page() {
             <Layout>
                 <div className="container py-12 md:py-24">
                     <div className="flex flex-col gap-4">
-                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none">Field Offices</h1>
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none text-center">Field Offices</h1>
                         <p className="text-gray-500 dark:text-gray-400">
                             There was an error loading the field offices. Please try again later.
                         </p>

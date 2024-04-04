@@ -1,6 +1,7 @@
 import { District } from './models/district';
 import { FieldOffice } from './models/field-office';
 import { FieldOffices } from './models/field-offices';
+import { InvasionResponse } from './models/invasion-response';
 import { PopulationResponse } from './models/population-response';
 
 const ZONE_ID_LOOKUP: Map<string, string> = new Map(
@@ -77,6 +78,8 @@ export async function fetchDistricts() : Promise<District[]> {
         return [];
     }
 
+    const invasions = await invasionResponse.json() as InvasionResponse;
+
     const districts: District[] = [];
     Object.entries(population.populationByDistrict).forEach(([key, value]) => {
         districts.push(new District(
@@ -85,6 +88,11 @@ export async function fetchDistricts() : Promise<District[]> {
             null,
             null,
         ));
+    });
+
+    districts.forEach(district => {
+        district.invasion = Object.entries(invasions.invasions).find(([key, value]) => key == district.name)?.[1] ?? null;
+        district.status = Object.entries(population.statusByDistrict).find(([key, value]) => key == district.name)?.[1] ?? null;
     });
 
     districts.sort((a, b) => b.population - a.population);

@@ -8,7 +8,7 @@ export default async function Page() {
             <Layout>
                 <div className="container py-12 md:py-24">
                     <div className="flex flex-col gap-4">
-                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none">Districts</h1>
+                        <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none text-center">Districts</h1>
                         <p className="text-gray-500 dark:text-gray-400">
                             There was an error loading the districts. Please try again later.
                         </p>
@@ -30,6 +30,10 @@ export default async function Page() {
                                 </div>
                                 <div className="border-t border-gray-200 p-4 text-sm dark:border-gray-800">
                                     <p>Population: {district.population}</p>
+                                    <p>Status: {district.status}</p>
+                                    { district.invasion && (
+                                        <p>Invasion: {district.invasion.type} ({district.invasion.progress})</p>
+                                    )}
                                 </div>
                             </div>
                         ))}
