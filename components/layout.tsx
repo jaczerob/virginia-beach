@@ -16,7 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
             <Head>
-                <title>Eras</title>
+                <title>Virginia Beach</title>
             </Head>
             <body 
                 className={cn(

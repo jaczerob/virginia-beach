@@ -1,10 +1,10 @@
 export class FieldOffice {
     constructor (
-        public zone: string,
-        public department: string,
-        public difficulty: number,
-        public annexes: number,
-        public open: boolean,
-        public expiring: number,
+        public readonly zone: string,
+        public readonly department: string,
+        public readonly difficulty: number,
+        public readonly annexes: number,
+        public readonly open: boolean,
+        public readonly expiring: number,
     ) {}
 }

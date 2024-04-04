@@ -23,7 +23,6 @@ export default async function Page() {
             <div className="container py-12 md:py-24">
                 <div className="flex flex-col gap-4">
                     <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl lg:text-5xl/none text-center">Field Offices</h1>
-
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
                         {fieldOffices.map(office => (
                             <div key={office.zone} className="bg-white rounded-lg shadow overflow-hidden dark:bg-gray-950">

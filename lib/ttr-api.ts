@@ -1,5 +1,7 @@
+import { District } from './models/district';
 import { FieldOffice } from './models/field-office';
 import { FieldOffices } from './models/field-offices';
+import { PopulationResponse } from './models/population-response';
 
 const ZONE_ID_LOOKUP: Map<string, string> = new Map(
     [
@@ -46,7 +48,45 @@ export async function fetchFieldOffices() : Promise<FieldOffice[]> {
         ));
     });
 
-    zonedFieldOffices.sort((a, b) => a.difficulty - b.difficulty);
+    zonedFieldOffices.push(new FieldOffice(
+        'Kaboomberg',
+        'Sellbot',
+        4,
+        150,
+        true,
+        0,
+    ));
+
+    zonedFieldOffices.sort((a, b) => b.difficulty - a.difficulty);
 
     return zonedFieldOffices;
+}
+
+export async function fetchDistricts() : Promise<District[]> {
+    const populationResponse = await fetch('https://toontownrewritten.com/api/population');
+    if (!populationResponse.ok) {
+        populationResponse.text().then(console.error);
+        return [];
+    }
+
+    const population = await populationResponse.json() as PopulationResponse;
+
+    const invasionResponse = await fetch('https://toontownrewritten.com/api/invasions');
+    if (!invasionResponse.ok) {
+        invasionResponse.text().then(console.error);
+        return [];
+    }
+
+    const districts: District[] = [];
+    Object.entries(population.populationByDistrict).forEach(([key, value]) => {
+        districts.push(new District(
+            key,
+            value,
+            null,
+            null,
+        ));
+    });
+
+    districts.sort((a, b) => b.population - a.population);
+    return districts;
 }
